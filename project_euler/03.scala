@@ -1,31 +1,5 @@
 import scala.collection.mutable.ListBuffer
 
-class PrimesIter extends Iterable[Int] {
-    var primes = ListBuffer[Int]()
-    var ints = Iterator.from(2)
-    def iterator = new Iterator[Int] {
-        def hasNext = true
-        def next:Int = {
-            ints = ints.dropWhile(n => primes.exists(n % _ == 0))
-            primes += ints.next
-            primes.last
-        }
-    }
-}
-
-class PrimesStream extends Iterable[Int] {
-    var primes = ListBuffer[Int]()
-    var ints = Iterator.from(2)
-    def iterator = new Iterator[Int] {
-        def hasNext = true
-        def next:Int = {
-            ints = ints.dropWhile(n => primes.exists(n % _ == 0))
-            primes += ints.next
-            primes.last
-        }
-    }
-}
-
 object solution_03 {
   import scala.math.sqrt
   def primes(limit: Int) = {
@@ -39,7 +13,7 @@ object solution_03 {
 
   def factors(num:BigInt): ListBuffer[Int] = {
     var fs = ListBuffer[Int]()
-    val max = sqrt(num).toInt
+    val max = sqrt(num.toFloat).toInt
     var rem = num
     for { p <- primes(max)} { 
       while (rem % p == 0)
